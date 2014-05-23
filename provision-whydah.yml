@@ -1,18 +1,18 @@
 ---
 # This playbook deploys Whydah to AWS AMI's
 
-- name: Set up Whydah Frontend
-  hosts: Whydah_Admin_Frontend
+- name: Set up Whydah UserIdentityBackend
+  hosts: Whydah_UserIdentityBackend
   sudo: true
   roles:
     - whydahApp
   tags:
-    adminapp
+    uib
   vars:
-    username: UserAdminWebapp
+    username: UserIdentityBackend
     group_id: net/whydah/identity
-    app_name: UserAdminWebapp
-    version: 0.4-SNAPSHOT
+    app_name: UserIdentityBackend
+    version: 2.0-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
 
 
@@ -31,36 +31,6 @@
     env_vars: -DIAM_MODE=PROD
 
 
-- name: Set up Whydah UserIdentityBackend
-  hosts: Whydah_UserIdentityBackend
-  sudo: true
-  roles:
-    - whydahApp
-  tags:
-    uib
-  vars:
-    username: UserIdentityBackend
-    group_id: net/whydah/identity
-    app_name: UserIdentityBackend
-    version: 2.0-SNAPSHOT
-    env_vars: -DIAM_MODE=PROD
-
-
-- name: Set up Whydah UserAdminService
-  hosts: Whydah_UserAdminService
-  sudo: true
-  roles:
-    - whydahApp
-  tags:
-      adminservice
-  vars:
-    username: UserAdminService
-    group_id: net/whydah/identity
-    app_name: UserAdminService
-    version: 1.4-SNAPSHOT
-    env_vars: -DIAM_MODE=PROD
-
-
 - name: Set up Whydah SSOLoginWebApp
   hosts: Whydah_SSOLoginWebApp
   sudo: true
@@ -73,4 +43,19 @@
     group_id: net/whydah/sso
     app_name: SSOLoginWebApp
     version: 2.0.1-SNAPSHOT
+    env_vars: -DIAM_MODE=PROD
+
+
+- name: Set up Whydah UserAdminWebapp
+  hosts: Whydah_UserAdminWebapp
+  sudo: true
+  roles:
+    - whydahApp
+  tags:
+    adminapp
+  vars:
+    username: UserAdminWebapp
+    group_id: net/whydah/identity
+    app_name: UserAdminWebapp
+    version: 0.4-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
