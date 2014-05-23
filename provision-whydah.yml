@@ -6,8 +6,8 @@
   sudo: true
   roles:
     - standard
-    - uib
-    - whydahApp
+    - configuration
+    - app
   tags:
     uib
   vars:
@@ -15,15 +15,20 @@
     group_id: net/whydah/identity
     app_name: UserIdentityBackend
     version: 2.0-SNAPSHOT
-    env_vars: -DIAM_MODE=PROD
     env_mode: PROD
+    env_vars: -DIAM_MODE=PROD
+    service_config_template: useridentitybackend.properties
+    service_config: useridentitybackend.PROD.properties
+  vars_files:
+    - vars/uib
 
 
 - name: Set up Whydah SecurityTokenService
   hosts: Whydah_SecurityTokenService
   sudo: true
   roles:
-    - whydahApp
+  # Note that the configuration for SecurityTokenService has not yet been found!
+    - app
   tags:
     token
   vars:
@@ -38,8 +43,8 @@
   hosts: Whydah_SSOLoginWebApp
   sudo: true
   roles:
-    - ssoLogin
-    - whydahApp
+    - configuration
+    - app
   tags:
     sso
   vars:
@@ -48,15 +53,17 @@
     app_name: SSOLoginWebApp
     version: 2.0.1-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
-    env_mode: PROD
-
+    service_config_template: ssologinservice.properties
+    service_config: ssologinservice.PROD.properties
+  vars_files:
+    - vars/ssoLogin
 
 - name: Set up Whydah UserAdminWebapp
   hosts: Whydah_UserAdminWebapp
   sudo: true
   roles:
-    - userAdministration
-    - whydahApp
+    - configuration
+    - app
   tags:
     adminapp
   vars:
@@ -65,5 +72,7 @@
     app_name: UserAdminWebapp
     version: 0.4-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
-    env_mode: PROD
-    service_config: useradministration
+    service_config_template: useradministration.properties
+    service_config: useradministration.PROD.properties
+  vars_files:
+    - vars/userAdministration

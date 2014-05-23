@@ -1,0 +1,3 @@
+- name: Set up app config file
+  template: src={{service_config_template}} dest=/home/{{username}}/{{service_config}}
+  sudo_user: "{{username}}"
