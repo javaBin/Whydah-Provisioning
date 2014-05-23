@@ -5,6 +5,8 @@
   hosts: Whydah_UserIdentityBackend
   sudo: true
   roles:
+    - standard
+    - uib
     - whydahApp
   tags:
     uib
@@ -14,6 +16,7 @@
     app_name: UserIdentityBackend
     version: 2.0-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
+    env_mode: PROD
 
 
 - name: Set up Whydah SecurityTokenService
@@ -35,6 +38,7 @@
   hosts: Whydah_SSOLoginWebApp
   sudo: true
   roles:
+    - ssoLogin
     - whydahApp
   tags:
     sso
@@ -44,12 +48,14 @@
     app_name: SSOLoginWebApp
     version: 2.0.1-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
+    env_mode: PROD
 
 
 - name: Set up Whydah UserAdminWebapp
   hosts: Whydah_UserAdminWebapp
   sudo: true
   roles:
+    - userAdministration
     - whydahApp
   tags:
     adminapp
@@ -59,3 +65,5 @@
     app_name: UserAdminWebapp
     version: 0.4-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
+    env_mode: PROD
+    service_config: useradministration

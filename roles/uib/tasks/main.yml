@@ -1,0 +1,3 @@
+- name: Set up app config file
+  template: src=useridentitybackend.properties dest=/home/{{username}}/useridentitybackend.{{env_mode}}.properties
+  sudo_user: "{{username}}"

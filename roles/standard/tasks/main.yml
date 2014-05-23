@@ -1,0 +1,7 @@
+---
+- name: Install standard linux utilities
+  yum: name={{item}} state=present
+  with_items:
+  - telnet
+  - lynx
+  - wget
