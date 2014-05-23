@@ -1,0 +1,35 @@
+---
+# This playbook deploys a ACS to a Ubuntu server
+
+#- name: Set up Solr
+#  hosts: Solr_server
+#  sudo: True
+#  tags: solr
+#  roles:
+#    - solr
+#  vars:
+#    acs_search_github_url: https://raw.githubusercontent.com/altran/ACSSearch
+
+- name: Set up Whydah Frontend
+  hosts: Whydah_Admin_Frontend
+  sudo: true
+  roles:
+    - UserAdminWebapp
+  vars:
+    username: UserAdminWebapp
+    group_id: net/whydah/identity
+    app_name: UserAdminWebapp
+    version: 0.4-SNAPSHOT
+    repository: http://mvnrepo.cantara.no/content/repositories/snapshots
+
+- name: Set up Whydah Frontend
+  hosts: Whydah_Admin_Frontend
+  sudo: true
+  roles:
+    - UserAdminWebapp
+  vars:
+    username: UserAdminWebapp
+    group_id: net/whydah/identity
+    app_name: UserAdminWebapp
+    version: 0.4-SNAPSHOT
+    repository: http://mvnrepo.cantara.no/content/repositories/snapshots

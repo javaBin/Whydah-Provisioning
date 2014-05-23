@@ -1,0 +1,17 @@
+#!/bin/sh
+
+A={{app_name}}
+V={{version}}
+JARFILE=$A-$V.jar
+
+# Maven artifact location
+path="{{repository}}/{{group_id}}/$A"
+version=`curl -s "$path/maven-metadata.xml" | grep "<version>" | sed "s/.*<version>\([^<]*\)<\/version>.*/\1/" | tail -n 1`
+echo "Version $version"
+build=`curl -s "$path/$version/maven-metadata.xml" | grep '<value>' | head -1 | sed "s/.*<value>\([^<]*\)<\/value>.*/\1/"`
+jar="$A-$build.jar"
+url="$path/$version/$jar"
+
+# Download
+echo $url
+wget -O $JARFILE -q -N $url

@@ -1,0 +1,13 @@
+# Ubuntu upstart file
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+script
+    su -c "nohup /usr/bin/java -jar /home/{{username}}/{{app_name}}-{{version}}.jar" -s /bin/sh - {{username}}
+end script
+
+
+
+# Problems getting .sh file to work in context of upstart
+#    su -c "/home/{{username}}/start-service.sh" -s /bin/sh - {{username}}
