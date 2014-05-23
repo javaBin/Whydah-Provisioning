@@ -21,6 +21,10 @@
   command: /home/{{username}}/update-service.sh chdir=/home/{{username}}
   sudo_user: "{{username}}"
 
+- name: Link latest version of app
+  file: src=/home/{{username}}/{{app_name}}-{{version}}.jar dest=/home/{{username}}/{{app_name}}.jar state=link
+  sudo_user: "{{username}}"
+
 - name: App upstart conf
   template: src=service-upstart.conf.jinja dest=/etc/init/{{app_name}}.conf owner=root mode=644
 

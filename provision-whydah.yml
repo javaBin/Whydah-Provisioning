@@ -1,35 +1,32 @@
 ---
-# This playbook deploys a ACS to a Ubuntu server
-
-#- name: Set up Solr
-#  hosts: Solr_server
-#  sudo: True
-#  tags: solr
-#  roles:
-#    - solr
-#  vars:
-#    acs_search_github_url: https://raw.githubusercontent.com/altran/ACSSearch
+# This playbook deploys Whydah to AWS AMI's
 
 - name: Set up Whydah Frontend
   hosts: Whydah_Admin_Frontend
   sudo: true
   roles:
-    - UserAdminWebapp
+    - whydahApp
+  tags:
+    admin
   vars:
     username: UserAdminWebapp
     group_id: net/whydah/identity
     app_name: UserAdminWebapp
     version: 0.4-SNAPSHOT
-    repository: http://mvnrepo.cantara.no/content/repositories/snapshots
+    env_vars: -DIAM_MODE=PROD
 
-- name: Set up Whydah Frontend
-  hosts: Whydah_Admin_Frontend
+
+- name: Set up Whydah SecurityTokenService
+  hosts: Whydah_SecurityTokenService
   sudo: true
   roles:
-    - UserAdminWebapp
+    - whydahApp
+  tags:
+    token
   vars:
-    username: UserAdminWebapp
-    group_id: net/whydah/identity
-    app_name: UserAdminWebapp
-    version: 0.4-SNAPSHOT
-    repository: http://mvnrepo.cantara.no/content/repositories/snapshots
+    username: SecurityTokenService
+    group_id: net/whydah/token
+    app_name: SecurityTokenService
+    version: 2.0.1-SNAPSHOT
+    env_vars: -DIAM_MODE=PROD
+
