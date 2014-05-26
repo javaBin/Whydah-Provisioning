@@ -29,6 +29,7 @@
   roles:
   # Note that the configuration for SecurityTokenService has not yet been found!
     - app
+    - configuration
   tags:
     token
   vars:
@@ -37,7 +38,10 @@
     app_name: SecurityTokenService
     version: 2.0.1-SNAPSHOT
     env_vars: -DIAM_MODE=PROD
-
+    service_config_template: securitytokenservice.properties
+    service_config: securitytokenservice.PROD.properties
+  vars_files:
+    - vars/securityTokenService
 
 - name: Set up Whydah SSOLoginWebApp
   hosts: Whydah_SSOLoginWebApp

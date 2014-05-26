@@ -1,1 +1,20 @@
 repository: http://mvnrepo.cantara.no/content/repositories/snapshots
+ldap_server: ec2-54-194-68-182.eu-west-1.compute.amazonaws.com
+
+#uib_uri: https://sso.altran.se/uib
+uib_uri: http://ec2-54-76-96-171.eu-west-1.compute.amazonaws.com:9995/uib
+
+#sso_uri: https://sso.altrancloud.com/sso
+sso_uri: https://ec2-54-76-96-171.eu-west-1.compute.amazonaws.com:9997/sso
+
+#security_token_service: https://sso.altran.se/tokenservice
+security_token_service: http://ec2-54-76-96-171.eu-west-1.compute.amazonaws.com:9998/tokenservice
+
+#Not verified useradmin uri!!!
+useradmin_uri: http://ec2-54-72-155-241.eu-west-1.compute.amazonaws.com:9996/useradmin/
+
+
+
+
+
+
