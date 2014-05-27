@@ -1,8 +1,8 @@
 repository: http://mvnrepo.cantara.no/content/repositories/snapshots
-ldap_server: ec2-54-194-68-182.eu-west-1.compute.amazonaws.com
+ldap_server: ip-172-31-34-198.eu-west-1.compute.internal
 
 #uib_uri: https://sso.altran.se/uib
-uib_uri: http://ec2-54-76-96-171.eu-west-1.compute.amazonaws.com:9995/uib
+uib_uri: http://ip-172-31-36-91.eu-west-1.compute.internal:9995/uib
 
 #sso_uri: https://sso.altrancloud.com/sso
 sso_uri: https://ec2-54-76-96-171.eu-west-1.compute.amazonaws.com:9997/sso
