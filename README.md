@@ -11,7 +11,10 @@ Prerequisites
 
 Getting started
 ---------------
-Copy hosts_example to hosts. Enter server IP/addresses.
+This project requires configuration that is specific for your domain and may be sensitive.
+The best alternative is to have these files in an own folder/project, and sym-link the files/folders in to avoid the possibility of erronously storing sensitive data the wrong place.
+
+Given a project "My-Whydah-Config" located in the
 
 Provisioning
 ------------

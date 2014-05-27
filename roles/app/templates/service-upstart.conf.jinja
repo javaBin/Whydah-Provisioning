@@ -11,6 +11,6 @@ stop on runlevel [06]
 #respawn
 
 script
-    su -c "nohup /usr/bin/java {{env_vars}} -jar -DIAM_CONFIG={{service_config}} /home/{{username}}/{{app_name}}.jar" -s /bin/sh - {{username}}
+    su -c "nohup /usr/bin/java {{env_vars}} -jar -DIAM_CONFIG=/home/{{username}}/{{service_config}} /home/{{username}}/{{app_name}}.jar" -s /bin/sh - {{username}}
 end script
 
