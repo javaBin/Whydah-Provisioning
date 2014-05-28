@@ -4,8 +4,8 @@ A={{app_name}}
 V={{version}}
 
 
-if [[ $V == *SNAPSHOT* ]] # The latest greates snapshot, Irrelevent of version number!!!
-then
+if [[ $V == *SNAPSHOT* ]]; then
+   $echo Note: If the artifact version contains "SNAPSHOT" - the artifact latest greates snapshot is downloaded, Irrelevent of version number!!!
    path="{{maven_snapshot_repository}}/{{group_id}}/$A"
    version=`curl -s "$path/maven-metadata.xml" | grep "<version>" | sed "s/.*<version>\([^<]*\)<\/version>.*/\1/" | tail -n 1`
    echo "Version $version"
@@ -22,5 +22,9 @@ fi
 echo Downloading $url
 wget -O $JARFILE -q -N $url
 
-#Create symlink
+
+#Create symlink or replace existing sym link
+if [ -h $A.jar ]; then
+   unlink $A.jar
+fi
 ln -s $JARFILE $A.jar
