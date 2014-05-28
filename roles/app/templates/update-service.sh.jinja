@@ -2,16 +2,25 @@
 
 A={{app_name}}
 V={{version}}
-JARFILE=$A-$V.jar
 
-# Maven artifact location
-path="{{repository}}/{{group_id}}/$A"
-version=`curl -s "$path/maven-metadata.xml" | grep "<version>" | sed "s/.*<version>\([^<]*\)<\/version>.*/\1/" | tail -n 1`
-echo "Version $version"
-build=`curl -s "$path/$version/maven-metadata.xml" | grep '<value>' | head -1 | sed "s/.*<value>\([^<]*\)<\/value>.*/\1/"`
-jar="$A-$build.jar"
-url="$path/$version/$jar"
+
+if [[ $V == *SNAPSHOT* ]] # The latest greates snapshot, Irrelevent of version number!!!
+then
+   path="{{maven_snapshot_repository}}/{{group_id}}/$A"
+   version=`curl -s "$path/maven-metadata.xml" | grep "<version>" | sed "s/.*<version>\([^<]*\)<\/version>.*/\1/" | tail -n 1`
+   echo "Version $version"
+   build=`curl -s "$path/$version/maven-metadata.xml" | grep '<value>' | head -1 | sed "s/.*<value>\([^<]*\)<\/value>.*/\1/"`
+   JARFILE="$A-$build.jar"
+   url="$path/$version/$JARFILE"
+else #A specific Release version
+   path="{{maven_releases_repository}}/{{group_id}}/$A"
+   url=$path/$V/$A-$V.jar
+   JARFILE=$A-$V.jar
+fi
 
 # Download
-echo $url
+echo Downloading $url
 wget -O $JARFILE -q -N $url
+
+#Create symlink
+ln -s $JARFILE $A.jar
