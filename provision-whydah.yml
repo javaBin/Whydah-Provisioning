@@ -14,7 +14,7 @@
     username: UserIdentityBackend
     group_id: net/whydah/identity
     app_name: UserIdentityBackend
-    version: 0.7
+    version: SNAPSHOT
     env_mode: PROD
     env_vars: -DIAM_MODE=PROD
     service_config_template: useridentitybackend.properties
