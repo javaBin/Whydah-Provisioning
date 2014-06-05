@@ -29,7 +29,7 @@
 
 
 #### Test that service works:
-- wait_for: port=9995 delay=5 timeout=30
+- wait_for: port={{service_port}} delay=5 timeout=30
 
 - name: Test that service responds
   get_url: url={{verify_service_url}} dest=/tmp/test_{{app_name}} force=true
