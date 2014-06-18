@@ -56,7 +56,7 @@
     username: SSOLoginWebApp
     group_id: net/whydah/sso
     app_name: SSOLoginWebApp
-    version: 2.0.1-SNAPSHOT
+    version: 0.6.0
     env_vars: -DIAM_MODE=PROD
     service_config_template: ssologinservice.properties
     service_config: ssologinservice.PROD.properties
