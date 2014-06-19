@@ -1,6 +1,6 @@
 ---
 - name: Set up user
-  user: name={{username}} #group=?
+  user: name={{username}} shell="/bin/bash"
 
 - name: Install Java dependencies
   yum: name={{ item }} state=present
