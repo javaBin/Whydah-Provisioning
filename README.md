@@ -25,4 +25,4 @@ Alternatives:
 * --private-key=~/mykeyfile.pem
 * -vvvv <- For debugging
 * --help
-* --tags uib | token | sso | adminapp <- To run one of the setups
+* --tags uib | sts | sso | adminapp <- To run one of the setups

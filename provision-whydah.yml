@@ -28,11 +28,11 @@
   hosts: Whydah_SecurityTokenService
   sudo: true
   roles:
-  # Note that the configuration for SecurityTokenService has not yet been found!
-    - app
+    - standard
     - configuration
+    - app
   tags:
-    token
+    sts
   vars:
     username: SecurityTokenService
     group_id: net/whydah/token
@@ -48,6 +48,7 @@
   hosts: Whydah_SSOLoginWebApp
   sudo: true
   roles:
+    - standard
     - configuration
     - app
   tags:
@@ -68,6 +69,7 @@
   hosts: Whydah_UserAdminWebapp
   sudo: true
   roles:
+    - standard
     - configuration
     - app
   tags:
