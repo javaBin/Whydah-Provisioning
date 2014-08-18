@@ -14,11 +14,15 @@
 #poll: 15
 
 - name: App update script
-  template: src=update-service.sh.jinja dest=/home/{{username}}/update-service.sh mode=744
+  template: src=update-service.sh dest=/home/{{username}}/update-service.sh mode=744
   sudo_user: "{{username}}"
 
 - name: Fetch Latest greatest version of App
   command: /home/{{username}}/update-service.sh chdir=/home/{{username}}
+  sudo_user: "{{username}}"
+
+- name: Create start-Service.sh script
+  template: src=start-service.sh dest=/home/{{username}}/start-service.sh mode=744
   sudo_user: "{{username}}"
 
 - name: App upstart conf
