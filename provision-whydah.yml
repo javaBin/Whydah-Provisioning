@@ -37,8 +37,8 @@
     username: SecurityTokenService
     group_id: net/whydah/token
     app_name: SecurityTokenService
-    applicationid: 3
-    applicationsecret: sadfsdf
+    applicationid: 11
+    applicationsecret: 6r46g3q986Ep6By7B9J46m96D
     version: SNAPSHOT
     env_vars: -DIAM_MODE=PROD
     service_config_template: securitytokenservice.properties
