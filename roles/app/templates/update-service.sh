@@ -5,7 +5,7 @@ V={{version}}
 
 
 if [[ $V == *SNAPSHOT* ]]; then
-   $echo Note: If the artifact version contains "SNAPSHOT" - the artifact latest greates snapshot is downloaded, Irrelevent of version number!!!
+   echo Note: If the artifact version contains "SNAPSHOT" - the artifact latest greates snapshot is downloaded, Irrelevent of version number!!!
    path="{{maven_snapshot_repository}}/{{group_id}}/$A"
    version=`curl -s "$path/maven-metadata.xml" | grep "<version>" | sed "s/.*<version>\([^<]*\)<\/version>.*/\1/" | tail -n 1`
    echo "Version $version"
