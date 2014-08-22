@@ -10,7 +10,7 @@
   file: dest=/etc/httpd/conf.d/welcome.conf state=absent
 
 - name: Create apache root landing page
-  template: src=root_landingpage.conf dest=/var/www/html/index.html owner=root group=root mode=644
+  template: src=root_landingpage.html dest=/var/www/html/index.html owner=root group=root mode=644
 
 - name: Copy Apache config
   template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644
