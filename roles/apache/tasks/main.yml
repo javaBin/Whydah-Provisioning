@@ -12,6 +12,10 @@
 - name: Create apache root landing page
   template: src=root_landingpage.html dest=/var/www/html/index.html owner=root group=root mode=644
 
+- name: Whydah image
+  copy: src=whydah.png dest=/var/www/html/whydah.png owner=root group=root mode=644
+
+
 - name: Copy Apache config
   template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644
 
