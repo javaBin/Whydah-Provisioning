@@ -14,7 +14,7 @@
     username: UserIdentityBackend
     group_id: net/whydah/identity
     app_name: UserIdentityBackend
-    version: SNAPSHOT
+    version: 2.0-rc-1
     env_mode: PROD
     env_vars: -DIAM_MODE=PROD
     service_config_template: useridentitybackend.properties
@@ -23,6 +23,17 @@
   vars_files:
     - vars/uib
 
+- name: Create STS hazelcast file
+  hosts: Whydah_SecurityTokenService
+  sudo: true
+  roles:
+    - configuration
+  tags:
+    sts
+  vars:
+    username: SecurityTokenService
+    service_config_template: hazelcast.xml
+    service_config: hazelcast.xml
 
 - name: Set up Whydah SecurityTokenService
   hosts: Whydah_SecurityTokenService
@@ -37,12 +48,11 @@
     username: SecurityTokenService
     group_id: net/whydah/token
     app_name: SecurityTokenService
-    applicationid: 11
-    applicationsecret: 6r46g3q986Ep6By7B9J46m96D
-    version: SNAPSHOT
-    env_vars: -DIAM_MODE=PROD
+    version: 2.0-rc-1
+    env_vars: -DIAM_MODE=PROD -Dhazelcast.config=hazelcast.xml
     service_config_template: securitytokenservice.properties
     service_config: securitytokenservice.PROD.properties
+#    verify_service_url: http://localhost:9998/tokenservice/
   vars_files:
     - vars/securityTokenService
 
@@ -59,7 +69,7 @@
     username: SSOLoginWebApp
     group_id: net/whydah/sso
     app_name: SSOLoginWebApp
-    version: SNAPSHOT
+    version: 2.0-rc-1
     env_vars: -DIAM_MODE=PROD
     service_config_template: ssologinservice.properties
     service_config: ssologinservice.PROD.properties
@@ -67,8 +77,8 @@
   vars_files:
     - vars/ssoLogin
 
-- name: Set up Whydah UserAdminWebapp
-  hosts: Whydah_UserAdminWebapp
+- name: Set up Whydah UserAdminWebApp
+  hosts: Whydah_UserAdminWebApp
   sudo: true
   roles:
     - standard
@@ -77,16 +87,36 @@
   tags:
     admin
   vars:
-    username: UserAdminWebapp
+    username: UserAdminWebApp
     group_id: net/whydah/identity
-    app_name: UserAdminWebapp
-    version: SNAPSHOT
+    app_name: UserAdminWebApp
+    version: 2.0-rc-1
     env_vars: -DIAM_MODE=PROD
-    service_config_template: useradministration.properties
-    service_config: useradministration.PROD.properties
+    service_config_template: useradminwebapp.properties
+    service_config: useradminwebapp.PROD.properties
     verify_service_url: http://localhost:9996/useradmin
   vars_files:
     - vars/userAdministration
+
+- name: Set up Whydah TestWebApp
+  hosts: Whydah_TestWebApp
+  sudo: true
+  roles:
+    - standard
+    - configuration
+    - app
+  tags:
+    testapp
+  vars:
+    username: TestWebApp
+    group_id: net/whydah/sso/web
+    app_name: TestWebApp
+    version: 2.0-rc-1
+    env_vars: -DIAM_MODE=TEST
+    service_port: 9990
+    service_config_template: testwebapp.properties
+    service_config: testwebapp.TEST.properties
+    verify_service_url: http://localhost:9990/test/hello
 
 - name: Set up Apache config
   hosts: Whydah_SSOLoginWebApp

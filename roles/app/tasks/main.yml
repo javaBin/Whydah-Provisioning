@@ -13,6 +13,10 @@
 #async: 7200
 #poll: 15
 
+- name: Create SU-TO-appname shortcut
+  template: src=su-to-user.sh dest=~/{{app_name}}_su_to.sh mode=744
+  sudo: false
+
 - name: App update script
   template: src=update-service.sh dest=/home/{{username}}/update-service.sh mode=744
   sudo_user: "{{username}}"
@@ -28,7 +32,7 @@
 - name: App upstart conf
   template: src=service-upstart.conf.jinja dest=/etc/init/{{app_name}}.conf owner=root mode=644
 
-- name: Start App service
+- name: ReStart App service
   service: name="{{app_name}}" state=restarted
 
 
