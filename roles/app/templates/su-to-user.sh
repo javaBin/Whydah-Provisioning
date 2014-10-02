@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo su {{username}}
+sudo su - {{username}}
