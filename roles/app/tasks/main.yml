@@ -17,6 +17,10 @@
   template: src=su-to-user.sh dest=~/{{app_name}}_su_to.sh mode=744
   sudo: false
 
+- name: Create restart-service shortcut
+  template: src=restart-service.sh dest=~/restart-{{app_name}}.sh mode=744
+  sudo: false
+
 - name: App update script
   template: src=update-service.sh dest=/home/{{username}}/update-service.sh mode=744
   sudo_user: "{{username}}"
@@ -26,11 +30,11 @@
   sudo_user: "{{username}}"
 
 - name: Create start-Service.sh script
-  template: src=start-service.sh dest=/home/{{username}}/start-service.sh mode=744
+  template: src=start-service.sh dest=/home/{{username}}/start-service.sh mode=744 backup=true
   sudo_user: "{{username}}"
 
 - name: App upstart conf
-  template: src=service-upstart.conf.jinja dest=/etc/init/{{app_name}}.conf owner=root mode=644
+  template: src=service-upstart.conf.jinja dest=/etc/init/{{app_name}}.conf owner=root mode=644 backup=true
 
 - name: ReStart App service
   service: name="{{app_name}}" state=restarted
