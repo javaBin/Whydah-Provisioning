@@ -16,4 +16,3 @@
 
 - name: start openldap
   service: name=slapd state=started enabled=yes
-  sudo_user: "{{username}}"
