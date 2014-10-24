@@ -5,10 +5,11 @@
   user: name={{username}} shell="/bin/bash"
 
 - name: Install OpenLDAP
-  yum: name={{ item }} state=present
+  apt: name={{ item }} state=present
   with_items:
-   - openldap-servers
-   - openldap-clients
+   - ldap-server
+   - ldap-client
+   - ldaptor-utils
 
 #- name: Copy Apache config
 #  template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644 backup=true
