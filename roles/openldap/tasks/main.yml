@@ -10,12 +10,9 @@
    - openldap-servers
    - openldap-clients
 
-
-- name: App upstart conf
-  template: src=service-upstart.conf.jinja dest=/etc/init/{{app_name}}.conf owner=root mode=644 backup=true
-
 #- name: Copy Apache config
 #  template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644 backup=true
 
 - name: start openldap
-  service: name=openldap-servers state=started enabled=yes
+  service: name=slapd state=started enabled=yes
+  sudo_user: "{{username}}"
