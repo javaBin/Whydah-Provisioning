@@ -1,0 +1,11 @@
+1. Create hash for password:
+slappasswd -h {SSHA} -s passwordHere
+Add hash (including {SSHA) to ldif file.
+
+2. sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f ./admin.ldif
+
+
+3. Set password in useradmin.ldif
+4. Run
+ldapadd -x -D dc=admin,dc=java,dc=no -W -f useradmin.ldif
+

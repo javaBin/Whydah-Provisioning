@@ -1,0 +1,27 @@
+version: 1
+
+dn: dc=java,dc=no
+objectClass: top
+objectClass: extensibleObject
+objectClass: domain
+
+dn: ou=users,dc=java,dc=no
+objectClass: top
+objectClass: organizationalUnit
+ou: users
+
+dn: uid=useradmin,ou=users,dc=java,dc=no
+objectClass: top
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+cn: User Admin
+sn: Admin
+employeeNumber: 0
+givenName: User
+initials: admin
+mail: erik-dev@fjas.no
+mobile: 12345678
+uid: useradmin
+userpassword:: Cheej8oc
+
