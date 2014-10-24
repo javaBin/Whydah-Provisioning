@@ -11,13 +11,7 @@
     ldap
   vars:
     username: openldap
-    group_id: net/whydah/identity
-    app_name: UserIdentityBackend
-    version: 2.0-rc-2
-    env_mode: PROD
-    env_vars: -DIAM_MODE=PROD
-    service_config_template: useridentitybackend.properties
-    service_config: useridentitybackend.PROD.properties
-    verify_service_url: http://localhost:9995/uib/authenticate/application/
-  vars_files:
-    - vars/uib
+    app_name: openldap
+    #verify_service_url: http://localhost:9995/uib/authenticate/application/
+ # vars_files:
+ #   - vars/uib
