@@ -1,0 +1,16 @@
+# Amazon Linux upstart file
+description "{{app_name}} upstart description"
+author "Stig <stig.lau@altran.com>"
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+#start on stopped rc RUNLEVEL=[2345]
+#stop on starting runlevel [016]
+
+#respawn
+
+script
+    su -c "nohup service slapd start" -s /bin/sh - {{username}}
+end script
+
