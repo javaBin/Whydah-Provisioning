@@ -7,5 +7,5 @@ Add hash (including {SSHA) to ldif file.
 
 3. Set password in useradmin.ldif
 4. Run
-ldapadd -x -D dc=admin,dc=java,dc=no -W -f useradmin.ldif
+ldapadd -x -D cn=admin,dc=java,dc=no -W -f useradmin.ldif
 
