@@ -9,7 +9,7 @@
   with_items:
    - ldap-server
    - ldap-client
-   - ldaptor-utils
+   - ldap-utils
 
 #- name: Copy Apache config
 #  template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644 backup=true
