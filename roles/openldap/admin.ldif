@@ -4,7 +4,7 @@ replace: olcSuffix
 olcSuffix: dc=java,dc=no
 -
 replace: olcRootDN
-olcRootDN: dc=admin,dc=java,dc=no
+olcRootDN: cn=admin,dc=java,dc=no
 -
 replace: olcRootPW
 olcRootPW: {SSHA}cxIIjM/wUb/gvTNzql7FJor/1kjGK48t
