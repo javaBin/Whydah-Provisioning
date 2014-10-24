@@ -8,6 +8,7 @@
   - telnet
   - lynx
   - wget
+  - vim
 
 - name: Set server identifyer in bash
   lineinfile: dest=~/.bash_profile regexp="^export PS1=" line='export PS1="[\u@\h/{{deployment_identifyer}} \w]$"'
