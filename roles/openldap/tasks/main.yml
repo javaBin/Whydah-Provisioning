@@ -1,4 +1,23 @@
 ---
+- apt: upgrade=dist
+
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: Install standard linux utilities
+  apt: name={{item}} state=present update_cache=yes
+  with_items:
+  - telnet
+  - lynx
+  - wget
+  - vim
+
+- name: Set server identifyer in bash
+  lineinfile: dest=~/.profile regexp="^export PS1=" line='export PS1="[\u@\h/{{deployment_identifyer}} \w]$"'
+  sudo: false
+
+
+
+
 # These tasks install OpenLDAP
 
 - name: Set up user
@@ -15,4 +34,4 @@
 #  template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644 backup=true
 
 - name: start openldap
-  service: name=slapd state=started enabled=yes
+  service: name=slapd state=restarted enabled=yes

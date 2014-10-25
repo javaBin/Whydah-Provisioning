@@ -4,8 +4,8 @@
 - name: Set up LDAP for Whydah
   hosts: javaBin_LDAP
   sudo: true
+  remote_user: ubuntu
   roles:
-    - standard
     - openldap
   tags:
     ldap
