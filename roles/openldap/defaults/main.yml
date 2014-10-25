@@ -1,0 +1,5 @@
+---
+domain: java.no
+backend: HDB
+slapd_password: "{{ lookup('password', '../../../slapd.password') }}"
+

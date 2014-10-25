@@ -1,0 +1,16 @@
+---
+- name: Check if ldap is installed
+  stat: path=/etc/ldap/slapd.d
+  register: ldap_installed
+
+- name: create useradmin (1/2)
+  template: src=useradmin.ldif.j2 dest=/root/useradmin.ldif
+  when: ldap_installed.stat.exists
+
+- name: create useradmin (2/3)
+  template: src=create-useradmin.sh.j2 dest=/root/create-useradmin.sh owner=root group=root mode=0700
+  when: ldap_installed.stat.exists
+
+- name: create useradmin (3/3)
+  shell: /root/create-useradmin.sh
+  when: ldap_installed.stat.exists
