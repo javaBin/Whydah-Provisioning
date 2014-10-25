@@ -13,7 +13,7 @@
   template: src=root_landingpage.html dest=/var/www/html/index.html owner=root group=root mode=644 backup=true
 
 - name: Whydah image
-  copy: src=whydah.png dest=/var/www/html/logo.png owner=root group=root mode=644
+  copy: src=the_red_duke.jpg dest=/var/www/html/logo.png owner=root group=root mode=644
 
 
 - name: Copy Apache config
