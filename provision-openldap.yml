@@ -7,11 +7,9 @@
   remote_user: ubuntu
   roles:
     - openldap
+    - whydah_useradmin
   tags:
     ldap
-  vars:
-    username: openldap
-    app_name: openldap
     #verify_service_url: http://localhost:9995/uib/authenticate/application/
  # vars_files:
  #   - vars/uib

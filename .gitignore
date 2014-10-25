@@ -1,3 +1,7 @@
 .idea
 target
 *.iml
+.vagrant/
+hosts
+slapd.password
+vars

@@ -1,0 +1,3 @@
+#/bin/bash
+PASSWORD=$(cat /root/slapd.password)
+ldapadd -x -D {{ldap_admin}} -w $PASSWORD -f /root/useradmin.ldif

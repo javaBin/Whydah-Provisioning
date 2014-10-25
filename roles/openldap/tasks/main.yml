@@ -1,6 +1,4 @@
 ---
-- apt: upgrade=dist
-
 - apt: update_cache=yes cache_valid_time=3600
 
 - name: Install standard linux utilities
@@ -15,23 +13,5 @@
   lineinfile: dest=~/.profile regexp="^export PS1=" line='export PS1="[\u@\h/{{deployment_identifyer}} \w]$"'
   sudo: false
 
-
-
-
-# These tasks install OpenLDAP
-
-- name: Set up user
-  user: name={{username}} shell="/bin/bash"
-
-- name: Install OpenLDAP
-  apt: name={{ item }} state=present
-  with_items:
-   - ldap-server
-   - ldap-client
-   - ldap-utils
-
-#- name: Copy Apache config
-#  template: src=whydah.conf dest=/etc/httpd/conf.d/whydah.conf owner=root group=root mode=644 backup=true
-
-- name: start openldap
-  service: name=slapd state=restarted enabled=yes
+- include: debian.yml
+  when: ansible_os_family == 'Debian'

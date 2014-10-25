@@ -1,0 +1,44 @@
+---
+- apt: update_cache=yes cache_valid_time=3600
+
+- name: Install standard linux utilities
+  apt: name={{item}} state=present update_cache=yes
+  with_items:
+  - telnet
+  - lynx
+  - wget
+  - vim
+
+#- name: Set server identifier in bash
+#  lineinfile: dest=~/.profile regexp="^export PS1=" line='export PS1="[\u@\h/{{deployment_identifyer}} \w]$"'
+#  sudo: false
+
+- name: Check if ldap is installed
+  stat: path=/etc/ldap/slapd.d
+  register: ldap_installed
+
+- name: pre-seed questions for OpenLDAP
+  when: not ldap_installed.stat.exists
+  shell: echo {{item}} | debconf-set-selections
+  with_items:
+    - slapd slapd/domain  string  {{domain}}
+    - slapd slapd/no_configuration  boolean false
+    - slapd slapd/invalid_config  boolean true
+    - slapd slapd/allow_ldap_v2 boolean false
+    - slapd shared/organization string  {{domain}}
+    - slapd slapd/purge_database  boolean false
+    - slapd slapd/backend select {{backend}}
+    - slapd slapd/password1 password {{ slapd_password }}
+    - slapd slapd/password2 password {{ slapd_password }}
+
+- name: Copy password file to /root/slapd.password
+  copy: src=slapd.password dest=/root/slapd.password owner=root group=root mode=0600
+
+- name: Install OpenLDAP
+  apt: name={{ item }} state=present
+  with_items:
+   - slapd
+   - ldap-utils
+
+- name: start openldap
+  service: name=slapd state=started enabled=yes
