@@ -1,11 +1,23 @@
 ---
 # This playbook deploys Whydah to AWS AMI's
 
+- name: Set up Standard server configuration
+  hosts:
+    - Whydah_UserIdentityBackend
+    - Whydah_SecurityTokenService
+    - Whydah_SSOLoginWebApp
+    - Whydah_UserAdminWebApp
+    - Whydah_TestWebApp
+  sudo: true
+  roles:
+    - standard
+  tags:
+    standard
+
 - name: Set up Whydah UserIdentityBackend
   hosts: Whydah_UserIdentityBackend
   sudo: true
   roles:
-    - standard
     - configuration
     - app
   tags:
@@ -39,7 +51,6 @@
   hosts: Whydah_SecurityTokenService
   sudo: true
   roles:
-    - standard
     - configuration
     - app
   tags:
@@ -60,7 +71,6 @@
   hosts: Whydah_SSOLoginWebApp
   sudo: true
   roles:
-    - standard
     - configuration
     - app
   tags:
@@ -81,7 +91,6 @@
   hosts: Whydah_UserAdminWebApp
   sudo: true
   roles:
-    - standard
     - configuration
     - app
   tags:
@@ -102,7 +111,6 @@
   hosts: Whydah_TestWebApp
   sudo: true
   roles:
-    - standard
     - configuration
     - app
   tags:
