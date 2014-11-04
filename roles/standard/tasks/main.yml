@@ -8,7 +8,7 @@
   - telnet
   - lynx
   - wget
-  - java-1.7.0-openjdk
+  - java-1.8.0-openjdk
 
 
 - name: Set server identifyer in bash
