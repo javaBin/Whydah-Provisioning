@@ -16,6 +16,10 @@ The best alternative is to have these files in an own folder/project, and sym-li
 
 Given a project "My-Whydah-Config" located in the
 
+Remember to link up import-script files! Needed for write of new files
+cd Whydah-javaBin-Provisioning/roles/foldercopy/files
+ln -s ../../../Whydah-javaBin-Configuration/uib-data-import files
+
 Provisioning
 ------------
 ansible-playbook provision-whydah.yml

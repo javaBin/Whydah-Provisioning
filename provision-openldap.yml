@@ -10,6 +10,4 @@
     - whydah_useradmin
   tags:
     ldap
-    #verify_service_url: http://localhost:9995/uib/authenticate/application/
- # vars_files:
- #   - vars/uib
+
