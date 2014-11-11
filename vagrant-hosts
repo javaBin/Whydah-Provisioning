@@ -1,2 +1,2 @@
 [javaBin_LDAP]
-openldap ansible_ssh_host=192.168.99.5 domain=java.no
+ldap ansible_ssh_host=192.168.99.5 domain=java.no ansible_ssh_user=vagrant

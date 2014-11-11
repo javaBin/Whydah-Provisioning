@@ -1,0 +1,40 @@
+---
+- name: Check if we have certs locally
+  connection: local
+  sudo: no  
+  local_action: stat path=openldap/tls/ca.pem
+  register: tls_file
+
+- name: "Create directory {{item}}"
+  file: path={{item}} state=directory owner=openldap group=ssl-cert mode=0755
+  with_items:
+    - "{{tls_dir}}"
+    - "{{tls_dir}}/private"
+  when: tls_file.stat.exists
+
+- name: Add openldap user to ssl-cert
+  user: name=openldap groups=ssl-cert
+
+- name: Copy tls ca certificate
+  copy: src=openldap/tls/ca.pem dest={{tls_dir}}/ca.pem owner=root group=ssl-cert mode=0755
+  when: tls_file.stat.exists
+
+- name: Copy tls certificate
+  copy: src=openldap/tls/cert.pem dest={{tls_dir}}/cert.pem owner=root group=ssl-cert mode=0755
+  when: tls_file.stat.exists
+
+- name: Copy private key
+  copy: src=openldap/tls/private.pem dest={{tls_dir}}/private/cert.pem owner=root group=ssl-cert mode=0640
+  when: tls_file.stat.exists
+
+- name: Install certificates (1/2)
+  copy: src=certinfo.ldif dest={{tls_dir}}/certinfo.ldif owner=root group=ssl-cert mode=0640
+  when: tls_file.stat.exists
+
+- name: Install certificates (2/2)
+  command: ldapmodify -Y EXTERNAL -H ldapi:/// -f {{tls_dir}}/{{item}}
+  when: tls_file.stat.exists
+  with_items:
+    - certinfo.ldif
+  notify:
+    - restart openldap

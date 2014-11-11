@@ -37,8 +37,11 @@
 - name: Install OpenLDAP
   apt: name={{ item }} state=present
   with_items:
+   - ssl-cert
    - slapd
    - ldap-utils
 
 - name: start openldap
   service: name=slapd state=started enabled=yes
+
+- include: tls.yml
