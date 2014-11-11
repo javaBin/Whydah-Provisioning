@@ -1,17 +1,3 @@
 ---
-- apt: update_cache=yes cache_valid_time=3600
-
-- name: Install standard linux utilities
-  apt: name={{item}} state=present update_cache=yes
-  with_items:
-  - telnet
-  - lynx
-  - wget
-  - vim
-
-- name: Set server identifyer in bash
-  lineinfile: dest=~/.profile regexp="^export PS1=" line='export PS1="[\u@\h/{{deployment_identifyer}} \w]$"'
-  sudo: false
-
 - include: debian.yml
   when: ansible_os_family == 'Debian'
